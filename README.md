@@ -50,6 +50,25 @@ books {
 
 <img width="2532" height="1225" alt="image" src="https://github.com/user-attachments/assets/0e265754-59b0-4720-b443-1f577c740351" />
 
+```POST https://localhost:7100/graphql ```
+```query {
+ book (bookId: 1) {
+  bookId
+  isbn
+   title
+   description
+   authors
+   {
+     authorId
+     fullName
+   }
+    }
+}
+```
+
+<img width="2480" height="928" alt="image" src="https://github.com/user-attachments/assets/d052846d-4f43-4a34-88e1-c1f37de04c26" />
+
+
 
 # References
 https://blog.devgenius.io/building-graphql-apis-in-net-8-0-a-step-by-step-guide-c9152a94769c
