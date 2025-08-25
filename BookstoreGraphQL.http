@@ -1,0 +1,6 @@
+@BookstoreGraphQL_HostAddress = http://localhost:5171
+
+GET {{BookstoreGraphQL_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
