@@ -1,6 +1,17 @@
 # API_Design_GraphQL
 API Design - GraphQL API
 
+<img width="2376" height="707" alt="image" src="https://github.com/user-attachments/assets/1cf7e139-7ce5-445f-8307-ba3ce699012f" />
+
+
+
+
+Please open:
+```https://localhost:7100/ui/altair```
+
+
+
+
 ```POST https://localhost:7100/graphql``` 
 
 ```query {
