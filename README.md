@@ -15,11 +15,9 @@ Please open:
 ```https://localhost:7100/ui/altair```
 
 
-
-
 ```POST https://localhost:7100/graphql``` 
-
-```query {
+```
+query {
 
 books {
   bookId
@@ -33,7 +31,9 @@ books {
 <img width="2297" height="1229" alt="image" src="https://github.com/user-attachments/assets/f991fee5-d3d7-4f24-bd1f-6c175a56431b" />
 
 ```POST https://localhost:7100/graphql ```
-```query {
+
+```
+query {
  books {
   bookId
   isbn
@@ -51,7 +51,9 @@ books {
 <img width="2532" height="1225" alt="image" src="https://github.com/user-attachments/assets/0e265754-59b0-4720-b443-1f577c740351" />
 
 ```POST https://localhost:7100/graphql ```
-```query {
+
+```
+query {
  book (bookId: 1) {
   bookId
   isbn
@@ -67,6 +69,32 @@ books {
 ```
 
 <img width="2480" height="928" alt="image" src="https://github.com/user-attachments/assets/d052846d-4f43-4a34-88e1-c1f37de04c26" />
+
+```POST https://localhost:7100/graphql ```
+
+```
+mutation {
+  addAuthor(
+    bookId: 1,
+    author: {
+      authorId: 6,
+      fullName: "Joanna Chmielewska",
+    }
+  ) {
+    bookId
+    isbn
+    title
+    description
+    authors {
+        authorId
+        fullName
+        bookId
+    }
+  }
+}
+```
+
+<img width="2286" height="1143" alt="image" src="https://github.com/user-attachments/assets/f37e4efa-69c9-48c0-ae4b-59a9398e8c56" />
 
 
 
