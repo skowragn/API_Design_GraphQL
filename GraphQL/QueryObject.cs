@@ -9,9 +9,11 @@ namespace BookstoreGraphQL.GraphQL;
 public class QueryObject : ObjectGraphType<object>
 {
    private readonly IBookstoreRepository _bookstoreRepository;
-   public QueryObject(IBookstoreRepository bookstoreRepository)
+   private readonly ICartRepository _cartRepository;
+    public QueryObject(IBookstoreRepository bookstoreRepository, ICartRepository cartRepository)
    {
       _bookstoreRepository = bookstoreRepository;
+      _cartRepository = cartRepository;
        Init();
    }
 		
@@ -41,6 +43,32 @@ public class QueryObject : ObjectGraphType<object>
             Resolver = new FuncFieldResolver<object>(async context =>
             {
                 return await _bookstoreRepository.GetBookByIdAsync(context.GetArgument<int>("bookId"));
+            })
+        });
+
+        AddField(new FieldType
+        {
+            Name = "cart",
+            Type = typeof(CartObject),
+            Arguments = new QueryArguments(
+                new QueryArgument<NonNullGraphType<IntGraphType>>
+                {
+                    Name = "cartId",
+                }
+            ),
+            Resolver = new FuncFieldResolver<object>(async context =>
+            {
+                return await _cartRepository.GetCartByIdAsync(context.GetArgument<int>("cartId"));
+            })
+        });
+
+        AddField(new FieldType
+        {
+            Name = "carts",
+            Type = typeof(ListGraphType<CartObject>),
+            Resolver = new FuncFieldResolver<object>(async context =>
+            {
+                return await _cartRepository.GetCartsAsync();
             })
         });
 

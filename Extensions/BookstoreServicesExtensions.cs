@@ -13,8 +13,9 @@ public static class BookstoreServicesExtensions
            .ConfigureContainer<ContainerBuilder>(containerBuilder =>
            {
                containerBuilder.RegisterType<BookstoreRepository>().As<IBookstoreRepository>().InstancePerLifetimeScope();
-               containerBuilder.RegisterType<QueryObject>().AsSelf().SingleInstance().UsingConstructor(typeof(IBookstoreRepository));
-               containerBuilder.RegisterType<MutationObject>().AsSelf().SingleInstance().UsingConstructor(typeof(IBookstoreRepository));
+               containerBuilder.RegisterType<CartRepository>().As<ICartRepository>().InstancePerLifetimeScope();
+               containerBuilder.RegisterType<QueryObject>().AsSelf().SingleInstance().UsingConstructor(typeof(IBookstoreRepository), typeof(ICartRepository));
+               containerBuilder.RegisterType<MutationObject>().AsSelf().SingleInstance().UsingConstructor(typeof(IBookstoreRepository), typeof(ICartRepository));
            });
 
         return host;
