@@ -97,6 +97,71 @@ mutation {
 <img width="2286" height="1143" alt="image" src="https://github.com/user-attachments/assets/f37e4efa-69c9-48c0-ae4b-59a9398e8c56" />
 
 
+```POST https://localhost:7100/graphql ```
+
+```
+query {
+  cart(cartId: 1) {
+    cartId
+    userId
+    items {
+        cartItemId
+        quantity
+        price
+        cartId
+        book
+        {
+          bookId
+          isbn
+          title
+          description
+          authors {
+              authorId
+              fullName
+              bookId
+          }
+        }
+      }
+     }
+  }
+```
+
+
+<img width="2457" height="1057" alt="image" src="https://github.com/user-attachments/assets/5522d708-cd26-45f9-a898-be6110e21138" />
+
+
+```POST https://localhost:7100/graphql ```
+
+```
+query {
+  carts {
+    cartId
+    userId
+    items {
+        cartItemId
+        quantity
+        price
+        cartId
+        book
+        {
+          bookId
+          isbn
+          title
+          description
+          authors {
+              authorId
+              fullName
+              bookId
+          }
+        }
+      }
+     }
+  }
+```
+
+<img width="2491" height="1016" alt="image" src="https://github.com/user-attachments/assets/56c2b800-c469-461d-8ff2-177df298cc94" />
+
+
 
 # References
 https://blog.devgenius.io/building-graphql-apis-in-net-8-0-a-step-by-step-guide-c9152a94769c
