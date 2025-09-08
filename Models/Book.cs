@@ -13,4 +13,8 @@ public class Book
    {
       Authors.Add(author);
    }
+   public void DeleteAuthor(Author author)
+   {
+      Authors.Remove(author);
+   }
 }

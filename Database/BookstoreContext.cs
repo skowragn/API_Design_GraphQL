@@ -6,8 +6,9 @@ namespace BookstoreGraphQL.Database
 	public class BookstoreContext(DbContextOptions<BookstoreContext> options) : DbContext(options)
     {
         public DbSet<Book> Books { get; set; }
-
+        public DbSet<Author> Authors { get; set; }
         public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -97,66 +98,66 @@ namespace BookstoreGraphQL.Database
             modelBuilder.Entity<Book>().Navigation(e => e.Authors).AutoInclude();
 
             modelBuilder.Entity<Cart>().HasData(
-               new Cart
-               {
-                   CartId = 1,
-                   UserId = "user1",
-               },
-                new Cart
-                {
-                    CartId = 2,
-                    UserId = "user2"
-                },
-                 new Cart
-                 {
-                     CartId = 3,
-                     UserId = "user3"
-                 });
+                   new Cart
+                   {
+                       CartId = 1,
+                       UserId = "user1",
+                   },
+                    new Cart
+                    {
+                        CartId = 2,
+                        UserId = "user2"
+                    },
+                     new Cart
+                     {
+                         CartId = 3,
+                         UserId = "user3"
+                     });
 
 
             modelBuilder.Entity<CartItem>().Navigation(e => e.Book).AutoInclude();
 
             modelBuilder.Entity<CartItem>().HasData(
-                                        new CartItem
-                                        {
-                                            CartItemId = 1,
-                                            Quantity = 2,
-                                            Price = 10.99m,
-                                            CartId = 1,
-                                            BookId = 1
-                                        },
-                                       new CartItem
-                                       {
-                                           CartItemId = 2,
-                                           Quantity = 10,
-                                           Price = 66.99m,
-                                           CartId = 2,
-                                           BookId = 2
-                                       },
-                                       new CartItem
-                                       {
-                                           CartItemId = 3,
-                                           Quantity = 10,
-                                           Price = 66.99m,
-                                           CartId = 3,
-                                           BookId = 3
-                                       },
-                                       new CartItem
-                                       {
-                                           CartItemId = 4,
-                                           Quantity = 10,
-                                           Price = 66.99m,
-                                           CartId = 3,
-                                           BookId = 4
-                                       },
-                                       new CartItem
-                                       {
-                                           CartItemId = 5,
-                                           Quantity = 10,
-                                           Price = 66.99m,
-                                           CartId = 3,
-                                           BookId = 5
-                                       });
+                    new CartItem
+                    {
+                        CartItemId = 1,
+                        Quantity = 2,
+                        Price = 10.99m,
+                        CartId = 1,
+                        BookId = 1
+                    },
+                    new CartItem
+                    {
+                        CartItemId = 2,
+                        Quantity = 10,
+                        Price = 66.99m,
+                        CartId = 2,
+                        BookId = 2
+                    },
+                    new CartItem
+                    {
+                        CartItemId = 3,
+                        Quantity = 10,
+                        Price = 66.99m,
+                        CartId = 3,
+                        BookId = 3
+                    },
+                    new CartItem
+                    {
+                        CartItemId = 4,
+                        Quantity = 10,
+                        Price = 66.99m,
+                        CartId = 3,
+                        BookId = 4
+                    },
+                    new CartItem
+                    {
+                        CartItemId = 5,
+                        Quantity = 10,
+                        Price = 66.99m,
+                        CartId = 3,
+                        BookId = 5
+                    });
 
 
 

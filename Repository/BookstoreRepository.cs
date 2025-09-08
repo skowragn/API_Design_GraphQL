@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using BookstoreGraphQL.Database;
+﻿using BookstoreGraphQL.Database;
 using BookstoreGraphQL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookstoreGraphQL.Repository;
 
@@ -30,8 +30,34 @@ namespace BookstoreGraphQL.Repository;
 
         public async Task<Book> AddAuthorToBookAsync(int bookId, Author author)
         {
-            var book = await _context.Books.Where(m => m.BookId == bookId).FirstOrDefaultAsync() ?? throw new KeyNotFoundException($"Book with ID {bookId} not found.");
-            book.AddAuthor(author);
+            var book = await _context.Books
+                .Include(b => b.Authors) 
+                .FirstOrDefaultAsync(m => m.BookId == bookId)
+                ?? throw new KeyNotFoundException($"Book with ID {bookId} not found.");
+
+            author.BookId = bookId;
+           _context.Authors.Add(author);
+
+           await _context.SaveChangesAsync();
+            return book;
+        }
+
+        public async Task<Book> DeleteAuthorFromCartAsync(int bookId, int authorId)
+        {
+            var book = await _context.Books
+                .Include(b => b.Authors)
+                .FirstOrDefaultAsync(m => m.BookId == bookId)
+                ?? throw new KeyNotFoundException($"Book with ID {bookId} not found.");
+           
+           var author = book.Authors.FirstOrDefault(a => a.AuthorId == authorId);
+           
+           
+          if (author == null)
+                throw new KeyNotFoundException($"Author with ID {authorId} not found in book with ID {bookId}.");
+
+        author.BookId = bookId;
+
+        _context.Authors.Remove(author);
             await _context.SaveChangesAsync();
             return book;
         }

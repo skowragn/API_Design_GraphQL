@@ -7,5 +7,6 @@ namespace BookstoreGraphQL.Repository
 		Task<List<Book>> GetBooksAsync();
 		Task<Book> GetBookByIdAsync(int bookId);
 		Task<Book> AddAuthorToBookAsync(int bookId, Author author);
-	}
+		Task<Book> DeleteAuthorFromCartAsync(int bookId, int authorId);
+    }
 }
