@@ -14,6 +14,7 @@ API Design - GraphQL API
 Please open:
 ```https://localhost:7100/ui/altair```
 
+## Query
 
 ```POST https://localhost:7100/graphql``` 
 ```
@@ -69,32 +70,6 @@ query {
 ```
 
 <img width="2480" height="928" alt="image" src="https://github.com/user-attachments/assets/d052846d-4f43-4a34-88e1-c1f37de04c26" />
-
-```POST https://localhost:7100/graphql ```
-
-```
-mutation {
-  addAuthor(
-    bookId: 1,
-    author: {
-      authorId: 6,
-      fullName: "Joanna Chmielewska",
-    }
-  ) {
-    bookId
-    isbn
-    title
-    description
-    authors {
-        authorId
-        fullName
-        bookId
-    }
-  }
-}
-```
-
-<img width="2286" height="1143" alt="image" src="https://github.com/user-attachments/assets/f37e4efa-69c9-48c0-ae4b-59a9398e8c56" />
 
 
 ```POST https://localhost:7100/graphql ```
@@ -161,6 +136,158 @@ query {
 
 <img width="2491" height="1016" alt="image" src="https://github.com/user-attachments/assets/56c2b800-c469-461d-8ff2-177df298cc94" />
 
+
+
+
+## Mutations
+```POST https://localhost:7100/graphql ```
+
+```
+mutation {
+  addAuthor(
+    bookId: 1,
+    author: {
+      authorId: 6,
+      fullName: "Joanna Chmielewska",
+    }
+  ) {
+    bookId
+    isbn
+    title
+    description
+    authors {
+        authorId
+        fullName
+        bookId
+    }
+  }
+}
+```
+
+<img width="2286" height="1143" alt="image" src="https://github.com/user-attachments/assets/f37e4efa-69c9-48c0-ae4b-59a9398e8c56" />
+
+
+#### Get book before adding a new author
+```POST https://localhost:7100/graphql ```
+
+```
+query {
+  book(
+    bookId: 5,
+  ) {
+    bookId
+    isbn
+    title
+    description
+    authors {
+        authorId
+        fullName
+        bookId
+    }
+  }
+}
+```
+<img width="2470" height="714" alt="image" src="https://github.com/user-attachments/assets/307e0bd7-3107-48bd-866b-5c196b75f63e" />
+
+
+#### Add author to book
+```POST https://localhost:7100/graphql ```
+
+```
+mutation {
+  addAuthor(
+    bookId: 5,
+    author: {
+      authorId: 11,
+      fullName: "Posw",
+    }
+  ) {
+    bookId
+    isbn
+    title
+    description
+    authors {
+        authorId
+        fullName
+        bookId
+    }
+  }
+}
+```
+
+  <img width="2469" height="880" alt="image" src="https://github.com/user-attachments/assets/30e84806-8775-4a91-ba7f-ac5c781ceca7" />
+
+  
+#### Get book to check author had been added
+
+```POST https://localhost:7100/graphql ```
+
+```
+query {
+  book(
+    bookId: 5,
+  ) {
+    bookId
+    isbn
+    title
+    description
+    authors {
+        authorId
+        fullName
+        bookId
+    }
+  }
+}
+```
+
+<img width="2486" height="883" alt="image" src="https://github.com/user-attachments/assets/37f8724e-6b28-4aa6-8d74-131f32ab0713" />
+
+
+#### Delete author from book
+```POST https://localhost:7100/graphql ```
+
+```
+mutation {
+  deleteAuthor(
+    bookId: 5,
+    authorId: 11
+     ) {
+    bookId
+    isbn
+    title
+    description
+    authors {
+        authorId
+        fullName
+        bookId
+    }
+  }
+}
+```
+<img width="2482" height="776" alt="image" src="https://github.com/user-attachments/assets/869c6e56-9356-4c60-9589-f0a57765170c" />
+
+
+#### Get book to check author had been added
+```POST https://localhost:7100/graphql ```
+
+```
+query {
+  book(
+    bookId: 5,
+  ) {
+    bookId
+    isbn
+    title
+    description
+    authors {
+        authorId
+        fullName
+        bookId
+    }
+  }
+}
+```
+<img width="2470" height="714" alt="image" src="https://github.com/user-attachments/assets/03cfbf6e-3afb-422b-8508-c353cbc5b341" />
 
 
 # References
