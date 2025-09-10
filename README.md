@@ -16,6 +16,13 @@ Please open:
 
 ## Query
 
+######################################################
+### Books query:
+-  books
+-  book: {bookId}
+  
+######################################################
+
 ```POST https://localhost:7100/graphql``` 
 ```
 query {
@@ -71,6 +78,13 @@ query {
 
 <img width="2480" height="928" alt="image" src="https://github.com/user-attachments/assets/d052846d-4f43-4a34-88e1-c1f37de04c26" />
 
+
+######################################################
+### Carts query:
+-  carts
+-  cart: {cartId}
+  
+######################################################
 
 ```POST https://localhost:7100/graphql ```
 
@@ -140,6 +154,14 @@ query {
 
 
 ## Mutations
+
+######################################################
+### Book and Authors operations:
+-  addAuthor
+- deleteAuthor
+  
+######################################################
+
 ```POST https://localhost:7100/graphql ```
 
 ```
@@ -288,6 +310,243 @@ query {
 }
 ```
 <img width="2470" height="714" alt="image" src="https://github.com/user-attachments/assets/03cfbf6e-3afb-422b-8508-c353cbc5b341" />
+
+
+######################################################
+### Cart and CartItems operations:
+- addCart
+- addItemToCart
+- deleteCartItemFromCart
+- deleteCart
+  
+######################################################
+
+#### Add new Cart for user
+```POST https://localhost:7100/graphql ```
+```
+mutation {
+  addCart(
+    cartId: 9,
+    cartInput : {
+       cartId: 9,
+       userId: "user 6"
+      }
+   ) {
+       cartId
+       userId
+       items {
+        cartItemId
+        quantity
+        price
+        cartId
+        book
+        {
+          bookId
+          isbn
+          title
+          description
+          authors {
+              authorId
+              fullName
+              bookId
+          }
+        }
+      }
+   }
+  }
+```
+<img width="2488" height="1022" alt="image" src="https://github.com/user-attachments/assets/fc8d0dc3-8a1c-4487-b395-0b83a498cab6" />
+
+#### Add new Cart Item for new Cart (cartId:9)
+```POST https://localhost:7100/graphql ```
+```
+mutation {
+  addItemToCart(
+    cartId: 9,
+    cartItemInput : {
+       cartItemId: 22,
+       quantity:1
+       price:20
+       cartId:9
+       bookId:1
+      }
+   ) {
+       cartId
+       userId
+       items {
+        cartItemId
+        quantity
+        price
+        cartId
+        book
+        {
+          bookId
+          isbn
+          title
+          description
+          authors {
+              authorId
+              fullName
+              bookId
+          }
+        }
+      }
+   }
+  }
+```
+<img width="2429" height="1066" alt="image" src="https://github.com/user-attachments/assets/2340ca5f-239e-49a6-9a4b-cb90ef86b51f" />
+
+#### Get Carts to check if new Cart (cartId:9) with new Cart Item  (cartItemId:22) has been added 
+```POST https://localhost:7100/graphql ```
+```
+query {
+  carts {
+    cartId
+    userId
+    items {
+        cartId
+        cartItemId
+        bookId
+        quantity
+        price
+        book {
+          bookId
+          isbn
+          title
+          description
+         authors {
+            authorId
+            fullName
+            bookId
+         }
+          }
+        }
+    }
+  }
+  ```
+
+<img width="2488" height="1094" alt="image" src="https://github.com/user-attachments/assets/16c88aeb-a852-48c5-8223-83256a7f07c8" />
+
+#### Delete Cart Item  (cartItemId:22) from Cart (cartId:9)  
+deleteCartItemFromCart
+
+```POST https://localhost:7100/graphql ```
+
+```
+mutation {
+  deleteCartItemFromCart(
+    cartId: 9,
+    cartItemId: 22)
+  {
+       cartId
+       cartItemId
+       bookId
+       quantity
+       price
+  }
+}
+```
+<img width="1851" height="557" alt="image" src="https://github.com/user-attachments/assets/89d91a76-d96e-41e1-b7b1-11f9c4414b1f" />
+
+
+#### Get Carts to check if new new Cart Item  (cartItemId:22) has been removed from Cart (cartId:9)  
+```POST https://localhost:7100/graphql ```
+```
+query {
+  carts {
+    cartId
+    userId
+    items {
+        cartId
+        cartItemId
+        bookId
+        quantity
+        price
+        book {
+          bookId
+          isbn
+          title
+          description
+         authors {
+            authorId
+            fullName
+            bookId
+         }
+          }
+        }
+    }
+  }
+  ```
+<img width="2452" height="1072" alt="image" src="https://github.com/user-attachments/assets/98668316-a7d6-4e92-906f-039263e9ad14" />
+
+#### Delete Cart (cartId:9)   
+deleteCart
+
+```POST https://localhost:7100/graphql ```
+
+```
+mutation {
+  deleteCart(
+    cartId: 9
+ )
+ {
+    cartId
+    userId
+    items {
+        cartItemId
+        quantity
+        price
+        cartId
+        book
+        {
+          bookId
+          isbn
+          title
+          description
+          authors {
+              authorId
+              fullName
+              bookId
+          }
+        }
+      }
+  }
+}
+```
+
+<img width="2035" height="963" alt="image" src="https://github.com/user-attachments/assets/2fe2f455-3d1b-42b9-911b-ec7e3524dbae" />
+
+
+
+#### Get Carts to check if new Cart (cartId:9) has been deleted  
+```POST https://localhost:7100/graphql ```
+```
+query {
+  carts {
+    cartId
+    userId
+    items {
+        cartId
+        cartItemId
+        bookId
+        quantity
+        price
+        book {
+          bookId
+          isbn
+          title
+          description
+         authors {
+            authorId
+            fullName
+            bookId
+         }
+          }
+        }
+    }
+  }
+  ```
+<img width="2479" height="1062" alt="image" src="https://github.com/user-attachments/assets/421ba71e-9b6e-40e9-93ec-04db1d45cf3a" />
 
 
 # References
