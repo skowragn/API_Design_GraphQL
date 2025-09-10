@@ -90,13 +90,13 @@ namespace BookstoreGraphQL.GraphQL
                     },
                     new QueryArgument<NonNullGraphType<CartInputObject>>
                     {
-                        Name = "CartInput",
+                        Name = "cartInput",
                         Description = "New Cart for user."
                     }
                 ),
                 Resolver = new FuncFieldResolver<object>(async context =>
                 {
-                    var cart = context.GetArgument<Cart>("cart");
+                    var cart = context.GetArgument<Cart>("cartInput");
                     return await _cartRepository.AddCartAsync(cart);
                 })
             });
@@ -114,13 +114,13 @@ namespace BookstoreGraphQL.GraphQL
                    },
                    new QueryArgument<NonNullGraphType<CartItemInputObject>>
                    {
-                       Name = "CartItemInput",
+                       Name = "cartItemInput",
                        Description = "New Cart for user."
                    }
                ),
                 Resolver = new FuncFieldResolver<object>(async context =>
                 {
-                    var cartItem = context.GetArgument<CartItem>("cartItem");
+                    var cartItem = context.GetArgument<CartItem>("cartItemInput");
                     var cartId = context.GetArgument<int>("cartId");
                     return await _cartRepository.AddCartItemToCartAsync(cartId, cartItem);
                 })

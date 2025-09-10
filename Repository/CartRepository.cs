@@ -37,7 +37,16 @@ public class CartRepository : ICartRepository
                    .FirstOrDefaultAsync(m => m.CartId == cartId) 
                    ?? throw new KeyNotFoundException($"Cart with ID {cartId} not found.");
 
-         cartItem.CartId = cartId;
+        cartItem.CartId = cartId;
+        cartItem.BookId = cartItem.BookId;
+
+        var book = await _context.Books
+                   .Include(b => b.Authors)
+                   .FirstOrDefaultAsync(m => m.BookId == cartItem.BookId) 
+                   ?? throw new KeyNotFoundException($"Cart with ID {cartId} not found."); 
+
+        cartItem.Book = book;
+        cartItem.Cart = cart;
         _context.CartItems.Add(cartItem);
         await _context.SaveChangesAsync();
         return cart;
