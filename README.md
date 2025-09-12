@@ -2,7 +2,17 @@
 API Design - GraphQL API
 
 <img width="524" height="220" alt="image" src="https://github.com/user-attachments/assets/8bf3d863-cd63-4ec7-a4df-fe5437841995" />
+
 <img width="340" height="248" alt="image" src="https://github.com/user-attachments/assets/d2931588-d3bb-4847-b677-b54e9eca0058" />
+
+
+<img width="2068" height="658" alt="image" src="https://github.com/user-attachments/assets/3d7a9e8e-9612-4d87-b234-df412455a4ea" />
+
+<img width="1630" height="743" alt="image" src="https://github.com/user-attachments/assets/de0c4302-fdf9-4483-951b-2ee2fcc148ce" />
+
+
+
+<img width="1205" height="782" alt="image" src="https://github.com/user-attachments/assets/7d122ecc-b79b-4210-99f1-7edb56e15223" />
 
 
 
