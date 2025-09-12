@@ -159,12 +159,11 @@ namespace BookstoreGraphQL.Database
                         BookId = 5
                     });
 
+            modelBuilder.Entity<CartItem>()
+                       .HasOne<Cart>()
+                       .WithMany(b => b.Items)
+                       .HasForeignKey(a => a.CartId);
 
-
-            modelBuilder.Entity<Cart>()
-                            .HasMany(c => c.Items)
-                            .WithOne(ci => ci.Cart)
-                            .HasForeignKey(ci => ci.CartId);
 
             modelBuilder.Entity<Cart>().Navigation(e => e.Items).AutoInclude();
 

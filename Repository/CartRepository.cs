@@ -46,7 +46,7 @@ public class CartRepository : ICartRepository
                    ?? throw new KeyNotFoundException($"Cart with ID {cartId} not found."); 
 
         cartItem.Book = book;
-        cartItem.Cart = cart;
+        cartItem.CartId = cart.CartId;
         _context.CartItems.Add(cartItem);
         await _context.SaveChangesAsync();
         return cart;

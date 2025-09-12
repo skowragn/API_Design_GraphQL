@@ -7,9 +7,16 @@ public static class BookstoreDatabaseExtensions
 {
     public static IServiceCollection AddBookstoreDatabase(this IServiceCollection services)
     {
-       services.AddEntityFrameworkInMemoryDatabase()
-               .AddDbContext<BookstoreContext>(context => { context.UseInMemoryDatabase("BookstoreDb"); });
+       // In- memory database
+        services.AddEntityFrameworkInMemoryDatabase()
+                .AddDbContext<BookstoreContext>(context => { context.UseInMemoryDatabase("BookstoreDb"); });
 
+
+        // server database
+        //var connectionString = "server=localhost\\SQLEXPRESS;database=BookstoreDb;Integrated Security=true;TrustServerCertificate=True";
+        //services.AddDbContext<BookstoreContext>(options =>
+        //                   options.UseSqlServer(connectionString,
+        //                   opt => opt.MigrationsAssembly(typeof(BookstoreDatabaseExtensions).Assembly.FullName)));
         return services;
     }
 }
